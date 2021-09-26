@@ -45,19 +45,22 @@ log_reg.fit(x_vect, y)
 
 log_reg.score(x_vect, y)
 
+# функция обработки сообщения в тему
 def GetIntentByModel(Text):
     return log_reg.predict(vectorizer.transform([Text]))[0]
-
-GetIntentByModel('Привет')
 
 # функция обработки команды '/start'
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Я КРЕМЛЕБОТ и подчиняюсь только моему господину Аркадию Великому")
 
+def help(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Федя отьебись от меня")
+
 # функция обработки текстовых сообщений
 def echo(update, context):
-    text = 'ECHO: ' + update.message.text 
-    context.bot.send_message(chat_id=update.effective_chat.id, text=text)    
+    text = update.message.text 
+    intent = GetIntentByModel(text)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=random.choice(BOT_CONFIG['intents'][intent]['responses']))    
 
 # функция обработки не распознных команд
 def unknown(update, context):
@@ -71,6 +74,9 @@ dispatcher.add_handler(start_handler)
 # обработчик текстовых сообщений
 echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
 dispatcher.add_handler(echo_handler)
+
+help_handler = CommandHandler('help',help)
+dispatcher.add_handler(help_handler)    
 
 # обработчик не распознных команд
 unknown_handler = MessageHandler(Filters.command, unknown)
