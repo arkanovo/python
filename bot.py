@@ -19,7 +19,7 @@ updater = Updater(token=TOKEN)
 dispatcher = updater.dispatcher
 
 
-with open('/BOT_CONFIG.json', 'r') as f:
+with open('D:\Code\python\BOT_CONFIG.json', encoding='utf-8') as f:
     BOT_CONFIG = json.load(f)
 
 x = []
