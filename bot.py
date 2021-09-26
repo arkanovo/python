@@ -51,10 +51,10 @@ def GetIntentByModel(Text):
 
 # функция обработки команды '/start'
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Я КРЕМЛЕБОТ и подчиняюсь только моему господину Аркадию Великому")
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Я БОТ и подчиняюсь только моему господину Аркадию Великому")
 
 def help(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Федя отьебись от меня")
+    context.bot.send_message(chat_id=update.effective_chat.id, text="")
 
 # функция обработки текстовых сообщений
 def echo(update, context):
